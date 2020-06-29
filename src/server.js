@@ -16,9 +16,9 @@ app.get("/", (req, res) => {
     }
 });
 
-app.post("/appointments", (req, res) => {
+app.post("/stack", (req, res) => {
     const dateTime = req.body.queryResult.parameters["date-time"].date_time;
-    db.get("appointments").push({date_time: dateTime}).write(); // .write ensures it is actually sav
+    db.get("stack").push({date_time: dateTime}).write(); // .write ensures it is actually sav
     const ourMessages = req.body.queryResult.fulfillmentMessages;
     res.send({fulfillmentMessages: ourMessages});
 });
