@@ -51,10 +51,10 @@ app.post("/stack", (req, res) => {
             });
     }
 
-    // const any = req.body.queryResult.parameters["any"];
-    // db.get("stack").push({date_time: dateTime}).write(); // .write ensures it is actually sav
-    // const ourMessages = req.body.queryResult.fulfillmentMessages;
-    // res.send({fulfillmentMessages: ourMessages});
+    const task = req.body.queryResult.parameters["any"];
+    db.get("stack").push({task: task}).write(); // .write ensures it is actually sav
+    const ourMessages = req.body.queryResult.fulfillmentMessages;
+    res.send({fulfillmentMessages: ourMessages});
 });
 
 module.exports = app;
