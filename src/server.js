@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/stack", (req, res) => {
+    console.log("SOMEBODY POSTED SOMETHING TO US:", req.body);
     const intent = req.body.queryResult.intent.displayName;
     switch (intent) {
         case "push":
@@ -39,6 +40,15 @@ app.post("/stack", (req, res) => {
             break;
         default:
             console.log("default");
+            res.send({
+                fulfillmentMessages: [
+                    {
+                        text: {
+                            text: ["Default"]
+                        }
+                    }
+                ]
+            });
     }
 
     // const any = req.body.queryResult.parameters["any"];
