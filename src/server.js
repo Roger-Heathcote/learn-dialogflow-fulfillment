@@ -17,10 +17,34 @@ app.get("/", (req, res) => {
 });
 
 app.post("/stack", (req, res) => {
-    const dateTime = req.body.queryResult.parameters["date-time"].date_time;
-    db.get("stack").push({date_time: dateTime}).write(); // .write ensures it is actually sav
-    const ourMessages = req.body.queryResult.fulfillmentMessages;
-    res.send({fulfillmentMessages: ourMessages});
+    const intent = req.body.queryResult.intent.displayName;
+    switch (intent) {
+        case "push":
+            console.log("push");
+            res.send({
+                fulfillmentMessages: [
+                    {
+                        text: {
+                            text: ["Added to your to do list!"]
+                        }
+                    }
+                ]
+            });
+            break;
+        case "pop":
+            console.log("pop");
+            break;
+        case "peek":
+            console.log("peek");
+            break;
+        default:
+            console.log("default");
+    }
+
+    // const any = req.body.queryResult.parameters["any"];
+    // db.get("stack").push({date_time: dateTime}).write(); // .write ensures it is actually sav
+    // const ourMessages = req.body.queryResult.fulfillmentMessages;
+    // res.send({fulfillmentMessages: ourMessages});
 });
 
 module.exports = app;
